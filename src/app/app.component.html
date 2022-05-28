@@ -1,4 +1,7 @@
 <h1>{{title}}</h1>
+
 <ap-photo 
-	url="https://upload.wikimedia.org/wikipedia/commons/5/5a/Sultan_the_Barbary_Lion.jpg" 
-	description="Leão da Barbária"></ap-photo>
+	*ngFor="let photo of photos"
+	[url]="photo.url" 
+	[description]="photo.description">
+</ap-photo>

@@ -6,5 +6,20 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Alura Pic';
+	title = 'Alura Pic';
+
+	photos = [
+		{
+			url: 'https://upload.wikimedia.org/wikipedia/commons/5/5a/Sultan_the_Barbary_Lion.jpg',
+			description: 'Leão da Barbária'
+		}, 
+		{
+			url: 'https://upload.wikimedia.org/wikipedia/commons/c/c6/Okonjima_Lioness.jpg',
+			description: 'Leoa de Okinjima'
+		}, 
+		{
+			url: 'https://upload.wikimedia.org/wikipedia/commons/a/ad/Mountain_lion_Winter.jpg',
+			description: 'Leão da Montanha'
+		}, 
+	];
 }
