@@ -1,12 +1,14 @@
-import { NgModule }				from '@angular/core';
-import { RouterModule, Routes }	from '@angular/router';
-import { PhotoFormComponent } from './photos/photo-form/photo-form.component';
-import { PhotoListComponent } from './photos/photo-list/photo-list.component';
+import { NgModule }					from '@angular/core';
+import { RouterModule, Routes }		from '@angular/router';
+
+import { PathNotFoundComponent }	from './errors/path-not-found/path-not-found.component';
+import { PhotoFormComponent } 		from './photos/photo-form/photo-form.component';
+import { PhotoListComponent }		 from './photos/photo-list/photo-list.component';
 
 const routes: Routes = [
-	{	path: 'user/flavio',	component: PhotoListComponent	},
-	{	path: 'p/add',			component: PhotoFormComponent	},
-	{	path: '**',				component: PhotoListComponent	}
+	{	path: 'user/flavio',	component: PhotoListComponent		},
+	{	path: 'p/add',			component: PhotoFormComponent		},
+	{	path: '**',				component: PathNotFoundComponent	}
 ];
 
 @NgModule({
