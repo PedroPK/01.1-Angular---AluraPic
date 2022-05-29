@@ -8,7 +8,7 @@ import { Photo }		from "./photo";
 })
 export class PhotoService {
 	
-	photos: any[] = [];
+	photos: Photo[] = [];
 	URL: string = 'http://localhost:3000';
 
 	constructor(
