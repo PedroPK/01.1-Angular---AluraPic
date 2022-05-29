@@ -1,4 +1,5 @@
 import { Component, OnInit }	from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Photo }				from '../photo/photo';
 import { PhotoService }			from '../photo/photo.service';
 
@@ -12,13 +13,18 @@ export class PhotoListComponent implements OnInit {
   photos: Photo[] = [];
 
 	// Using the Constructor only for Dependence Injections
-	constructor(private service: PhotoService) {
-	}
+	constructor(
+		private service:		PhotoService,
+		private activatedRoute:	ActivatedRoute
+	) {}
 	
 	// Any setup needed its going to be done here
 	// Phase On Init occurs after Instacialization and after this component receive the Inbound properties.
 	ngOnInit(): void {
-		this.service.listFromUser('flavio')
+		const userName = this.activatedRoute.snapshot.params['userName'];
+		console.log(userName);
+
+		this.service.listFromUser(userName)
 			.subscribe(
 				// Observable is a Lazy object. It will not access the URL unless there is an Observer.
 				photos => {
