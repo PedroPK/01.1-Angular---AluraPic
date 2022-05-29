@@ -16,6 +16,7 @@ export class AppComponent {
 			.subscribe( // Observable is a Lazy object. It will not access the URL unless there is an Observer.
 				photos => {
 					console.log(photos)
+					console.log(photos[0].description)
 					this.photos = photos
 				}
 			); 

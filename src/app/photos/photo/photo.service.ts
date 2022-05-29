@@ -1,6 +1,7 @@
-import { HttpClient } from "@angular/common/http"
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { HttpClient }	from "@angular/common/http"
+import { Injectable }	from "@angular/core";
+import { Observable }	from "rxjs";
+import { Photo }		from "./photo";
 
 @Injectable({
 	providedIn:	'root'
@@ -15,11 +16,11 @@ export class PhotoService {
 	) {
 	}
 
-	listFromUser(userName: string): Observable<Object[]> {
-		let result: Observable<Object[]>;
+	listFromUser(userName: string): Observable<Photo[]> {
+		let result: Observable<Photo[]>;
 		result = 
 			this.http
-				.get<Object[]>(this.URL + `/${userName}/photos`);
+				.get<Photo[]>(this.URL + `/${userName}/photos`);
 		
 		return result;
 	}
