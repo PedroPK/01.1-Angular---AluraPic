@@ -1,5 +1,10 @@
-	<p>Photo-Grid works!</p>
-
+<p 
+	class="text-center text-muted"
+	*ngIf="!photos.length"
+	>
+	Sorry, no photos to be displayed
+</p>
+	
 	<ol class="list-unstyled row">
 		<li *ngFor="let cols of rows" class="row">
 			<div *ngFor="let photo of cols" class="col-4">
