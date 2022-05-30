@@ -12,6 +12,7 @@ import { PhotoService }			from '../photo/photo.service';
 export class PhotoListComponent implements OnInit {
 								// avoid any runtime error if ngOnInit() is not defined correctly
 	photos: Photo[] = [];
+	filter: string	= '';
 
 	// Using the Constructor only for Dependence Injections
 	constructor(
