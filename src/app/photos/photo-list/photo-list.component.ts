@@ -1,7 +1,6 @@
 import { Component, Input, OnInit }	from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Photo }				from '../photo/photo';
-import { PhotoService }			from '../photo/photo.service';
+import { ActivatedRoute }			from '@angular/router';
+import { Photo }					from '../photo/photo';
 
 @Component({
   selector: 'app-photo-list',
@@ -16,25 +15,18 @@ export class PhotoListComponent implements OnInit {
 
 	// Using the Constructor only for Dependence Injections
 	constructor(
-		private service:		PhotoService,
 		private activatedRoute:	ActivatedRoute
 	) {}
 	
 	// Any setup needed its going to be done here
 	// Phase On Init occurs after Instacialization and after this component receive the Inbound properties.
 	ngOnInit(): void {
-		const userName = this.activatedRoute.snapshot.params['userName'];
-		//console.log(userName);
-
-		this.service.listFromUser(userName)
-			.subscribe(
-				// Observable is a Lazy object. It will not access the URL unless there is an Observer.
-				photos => {
-					//console.log(photos);
-					//console.log(photos[0].description);
-					this.photos = photos;
-				}
-			);
+		/*
+		  Replacing the Service consumption to consume the PhotoListResolver.
+		  Now we are retrieving final data to PhotoList Template, with Filter applyed a priori, 
+		  without the need to load all data and then refresh the Template moments after Filter execute
+		 */
+		this.photos		=	this.activatedRoute.snapshot.data['photos'];
 	}
 
 }
