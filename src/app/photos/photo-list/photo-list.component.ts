@@ -1,5 +1,6 @@
-import { Component, Input, OnInit }	from '@angular/core';
+import { Component, OnInit }		from '@angular/core';
 import { ActivatedRoute }			from '@angular/router';
+import { debounceTime, Subject }	from 'rxjs';
 import { Photo }					from '../photo/photo';
 
 @Component({
@@ -12,6 +13,10 @@ export class PhotoListComponent implements OnInit {
 								// avoid any runtime error if ngOnInit() is not defined correctly
 	photos: Photo[] = [];
 	filter: string	= '';
+
+				// Subject is a special type of Observable (and also an Observer), provided by RXJS
+				// We feed a new value to the Subject invoking the next(), multicasting it to all Observers registered.
+	debouncer:	Subject<string>		=	new Subject<string>();
 
 	// Using the Constructor only for Dependence Injections
 	constructor(
@@ -27,6 +32,10 @@ export class PhotoListComponent implements OnInit {
 		  without the need to load all data and then refresh the Template moments after Filter execute
 		 */
 		this.photos		=	this.activatedRoute.snapshot.data['photos'];
+
+		this.debouncer
+			.pipe(debounceTime(500))
+			.subscribe(filter => this.filter = filter);
 	}
 
 }

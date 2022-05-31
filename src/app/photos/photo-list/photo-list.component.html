@@ -6,8 +6,9 @@
 		type="search"
 		placeholder="search for description..."
 		autofocus
-		(keyup)="filter = $any($event.target).value"
+		(keyup)="debouncer.next($any($event.target).value)"
 		>
+		<!--	nex() feeds a new value to the Subject debouncer-->
 	</form>
 </div>
 
