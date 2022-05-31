@@ -1,0 +1,13 @@
+<p>load-button works!</p>
+
+<div			class="text-center"			*ngIf="hasMoreItens; else messageNoItensToLoad">
+	<button		class="btn	btn-primary">
+		Load more
+	</button>
+</div>
+
+<ng-template	#messageNoItensToLoad>
+	<p				class="text-center	text-muted">
+		No more itens to load
+	</p>
+</ng-template>

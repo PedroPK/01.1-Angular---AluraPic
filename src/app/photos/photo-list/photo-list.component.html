@@ -15,3 +15,7 @@
 <app-photo-grid
 	[photos]="photos | filterByDescription: filter"
 ></app-photo-grid>
+
+<app-load-button	[hasMoreItens]="hasMorePhotos"
+					(click)="load()">
+</app-load-button>

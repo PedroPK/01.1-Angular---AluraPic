@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit }		from '@angular/core';
 import { ActivatedRoute }			from '@angular/router';
 import { debounceTime, Subject }	from 'rxjs';
 import { Photo }					from '../photo/photo';
+import { PhotoService } from '../photo/photo.service';
 
 @Component({
   selector: 'app-photo-list',
@@ -18,9 +19,19 @@ export class PhotoListComponent implements OnInit, OnDestroy  {
 				// We feed a new value to the Subject invoking the next(), multicasting it to all Observers registered.
 	debouncer:	Subject<string>		=	new Subject<string>();
 
+	// Attribute to load more photos, if there is any
+	hasMorePhotos:	boolean			=	true;
+	
+	// Current Page Number of Pagination
+	currentPage:	number			=		1;
+
+	// Username that 
+	userName:		string			=		''
+
 	// Using the Constructor only for Dependence Injections
 	constructor(
-		private activatedRoute:	ActivatedRoute
+		private activatedRoute:	ActivatedRoute,
+		private service:		PhotoService
 	) {}
 	
 	// Any setup needed its going to be done here
@@ -32,6 +43,9 @@ export class PhotoListComponent implements OnInit, OnDestroy  {
 		without the need to load all data and then refresh the Template moments after Filter execute
 		*/
 		this.photos		=	this.activatedRoute.snapshot.data['photos'];
+
+		this.userName	=	this.activatedRoute.snapshot.params['userName'];
+
 		
 		this.debouncer
 		.pipe(debounceTime(500))
@@ -42,6 +56,21 @@ export class PhotoListComponent implements OnInit, OnDestroy  {
 	ngOnDestroy(): void {
 		// Stop the observation and freeing memory and processing time
 		this.debouncer.unsubscribe();
+	}
+
+	load() {
+		this.currentPage = this.currentPage + 1;
+		this.service
+			.listFromUserPaginated(this.userName, this.currentPage)
+			.subscribe(
+				photos =>
+				{
+					this.photos = this.photos.concat(photos);
+					if ( !photos.length ) {
+						this.hasMorePhotos = false;
+					}
+				}
+			);
 	}
 
 }
