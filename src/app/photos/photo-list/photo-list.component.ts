@@ -10,14 +10,12 @@ import { PhotoService } from '../photo/photo.service';
   styleUrls: ['./photo-list.component.css']
 })
 // Now this Component is responsible only to consume Service and Store the Photo array
-export class PhotoListComponent implements OnInit, OnDestroy  {
+export class PhotoListComponent implements OnInit  {
 								// avoid any runtime error if ngOnInit() is not defined correctly
 	photos: Photo[] = [];
-	filter: string	= '';
+	filterOutput: string	= '';
 
-				// Subject is a special type of Observable (and also an Observer), provided by RXJS
-				// We feed a new value to the Subject invoking the next(), multicasting it to all Observers registered.
-	debouncer:	Subject<string>		=	new Subject<string>();
+	
 
 	// Attribute to load more photos, if there is any
 	hasMorePhotos:	boolean			=	true;
@@ -45,21 +43,11 @@ export class PhotoListComponent implements OnInit, OnDestroy  {
 		this.photos		=	this.activatedRoute.snapshot.data['photos'];
 
 		this.userName	=	this.activatedRoute.snapshot.params['userName'];
-
-		
-		this.debouncer
-		.pipe(debounceTime(500))
-					// filter (not this.filter) is coming from the PhotoList Template (ilterByDescription: filter)
-		.subscribe(filter => this.filter = filter);
 	}
 	
-	ngOnDestroy(): void {
-		// Stop the observation and freeing memory and processing time
-		this.debouncer.unsubscribe();
-	}
-
 	load() {
 		this.currentPage = this.currentPage + 1;
+		this.filterOutput = '';
 		this.service
 			.listFromUserPaginated(this.userName, this.currentPage)
 			.subscribe(

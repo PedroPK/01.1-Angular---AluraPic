@@ -1,0 +1,15 @@
+
+<div class="text-center mt-3 mb-3">
+	<form>
+		<i aria-hidden="true" class="fa fa-search">&NonBreakingSpace;</i>
+
+		<input
+			class="rounded"
+			type="search"
+			placeholder="search for description..."
+			autofocus
+			(keyup)="debouncer.next($any($event.target).value)"
+		>
+		<!--	nex() feeds a new value to the Subject debouncer-->
+	</form>
+</div>
