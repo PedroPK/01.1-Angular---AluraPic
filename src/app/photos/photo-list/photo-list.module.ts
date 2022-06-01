@@ -6,8 +6,9 @@ import { PhotoGridComponent }	from './photo-grid/photo-grid.component';
 import { PhotoListComponent }	from './photo-list.component';
 import { FilterByDescription }	from './filter-by-description.pipe';
 import { LoadButtonComponent }	from './load-button/load-button.component';
-import { CardModule } from 'src/app/shared/components/card/card.module';
-import { SearchComponent } from './search/search.component';
+import { CardModule } 			from 'src/app/shared/components/card/card.module';
+import { SearchComponent } 		from './search/search.component';
+import { DarkenOnHoverModule } 	from 'src/app/shared/directives/darken-on-hover/darken-n-hover-module';
 
 @NgModule({
 	declarations:[
@@ -20,7 +21,8 @@ import { SearchComponent } from './search/search.component';
 	imports:[
 		CommonModule,
 		PhotoModule,
-		CardModule
+		CardModule,
+		DarkenOnHoverModule
 	]
 })
 export class PhotoListModule {}
